@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tvA2BwM+XFI=",
+  "dgSpecHash": "1hVbJOALoE4=",
   "success": true,
-  "projectFilePath": "D:\\AK\\Yr26Dating\\API\\API.csproj",
+  "projectFilePath": "D:\\AK\\Yr26Dating\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ANIL\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ANIL\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
