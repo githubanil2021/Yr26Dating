@@ -1,6 +1,7 @@
 using API.Data;
 using API.Interfaces;
 using API.Services;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -36,7 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
 app.UseAuthentication();

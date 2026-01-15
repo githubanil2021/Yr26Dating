@@ -2,11 +2,12 @@ import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalE
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { InitService } from '../core/services/init-service';
 import { lastValueFrom } from 'rxjs';
+import { errorInterceptor } from '../core/interceptors/error-interceptor';
 // import { provideToastr } from 'ngx-toastr'; // Standalone toastr provider
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withViewTransitions()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([errorInterceptor])),
 
     //  provideNoopAnimations(), // Required animations module
     provideToastr({ positionClass: 'toast-bottom-right' }),
