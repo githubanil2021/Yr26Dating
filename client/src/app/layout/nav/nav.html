@@ -2,7 +2,7 @@
   <div class="flex align-middle w-full">
     <a class="text-yellow"> Dating App </a>
     <nav class="flex gap-1 uppercase ml-20 align-middle">
-      <a  routerLink="/members" routerLinkActive="text-accent">Matches</a>
+      <a routerLink="/members" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact: true}">Matches</a>
       <a routerLink="/lists" routerLinkActive="text-accent">Lists</a>
       <a routerLink="/messages" routerLinkActive="text-accent">Messages</a>
     </nav>
@@ -11,9 +11,21 @@
       <div>
         @if(accountService.currentUser(); as user ){
 
+        <img [src]="user?.imageUrl || '/user.png'" class="w-8 h-8 rounded-full">
         <span> username:{{user.displayName}}</span>
         <button type="button" class="btn">Edit Profile</button>
         <button type="button" class="btn" (click)="logout()">Logout</button>
+
+        <div class="dropdown">
+          <button tabindex="1" role="button" class="flex flex-col justify-center m-1">
+            Click {{selectedTheme()}}</button>
+          <ul tabindex="1">
+            @for(theme of themes; track $index){
+              <li (click)="handleSelectedTheme(theme)">{{theme}}</li>
+            }
+            </ul>
+        </div>
+
         } @else{
 
         <form #loginForm="ngForm" (ngSubmit)="login()" class="flex items-center gap-3">

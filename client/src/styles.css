@@ -1,4 +1,6 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:all
+}
 /* You can add global styles to this file, and also import other style files */
 
