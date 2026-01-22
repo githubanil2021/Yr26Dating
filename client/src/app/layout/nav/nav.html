@@ -7,13 +7,17 @@
       <a routerLink="/messages" routerLinkActive="text-accent">Messages</a>
     </nav>
 
+    @if(busyService.busyRequestCount()>0){
+      <span class ="loading loading-spinner text-accent"></span>
+    }
+
     <div class="flex w-full justify-right ml-11">
       <div>
         @if(accountService.currentUser(); as user ){
 
         <img [src]="user?.imageUrl || '/user.png'" class="w-8 h-8 rounded-full">
         <span> username:{{user.displayName}}</span>
-        <button type="button" class="btn">Edit Profile</button>
+        <button type="button" class="btn"><a routerLink="/members/{{user.id}}">Edit Profile.</a></button>
         <button type="button" class="btn" (click)="logout()">Logout</button>
 
         <div class="dropdown">
