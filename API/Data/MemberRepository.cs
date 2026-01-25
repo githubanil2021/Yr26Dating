@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using API.Interfaces;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
- 
+
 
 
 namespace API.Data
 {
     public class MemberRepository(AppDbContext context) : IMemberRepository
     {
-       
+
 
         public async Task<bool> SaveAllAsync()
         {
@@ -50,7 +50,8 @@ namespace API.Data
         {
             return await context.Members
                 .Include(x => x.User)
-                .SingleOrDefaultAsync(x=>x.Id==id);
+                .Include(x => x.Photos)
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
 
