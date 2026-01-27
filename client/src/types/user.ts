@@ -17,6 +17,11 @@ export type LoginCreds ={
   email:string;
   password:string;
 
+  gender:string;
+  dateOfBirth:string;
+  city:string;
+  country:string;
+
 }
 
 

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration.Assemblies;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -29,7 +31,15 @@ namespace API.Controllers
                 DisplayName = regDto.DisplayName,
                 Email = regDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(regDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                Member = new Member
+                {
+                    DisplayName = regDto.DisplayName,
+                    Gender = regDto.Gender,
+                    City = regDto.City,
+                    Country = regDto.Country,
+                    DateOfBirth = regDto.DateOfBirth
+                }
             };
 
             context.Users.Add(user);
@@ -43,15 +53,15 @@ namespace API.Controllers
         {
             var user = await context.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
 
-            if(user==null )return Unauthorized("unauthorised email");
+            if (user == null) return Unauthorized("unauthorised email");
 
-           using var hmac = new HMACSHA512(user.PasswordSalt);
+            using var hmac = new HMACSHA512(user.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-                 
-            for ( var i =0; i<computedHash.Length; i++)
+
+            for (var i = 0; i < computedHash.Length; i++)
             {
-                if(computedHash[i ] != user.PasswordHash[i]) return Unauthorized("invalid password");
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("invalid password");
             }
 
             return user.ToDto(tokenService);

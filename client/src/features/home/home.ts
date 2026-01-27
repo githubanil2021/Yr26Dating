@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { Register } from "../account/register/register";
 import { User } from '../../types/user';
- 
+
 @Component({
   selector: 'app-home',
   imports: [Register],
@@ -9,26 +9,16 @@ import { User } from '../../types/user';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
+  protected registerMode=signal(true);
+  showRegister(value: boolean)
+  {
+    this.registerMode.set(value);
+  }
 
-
-
-
-  ngOnInit(): void {
+    ngOnInit(): void {
 
     throw new Error('Method not implemented.');
   }
 
-
-
-
-  protected registerMode=signal(false);
-
-
-
-  showRegister(value: boolean)
-  {
-
-    this.registerMode.set(value);
-  }
 
 }
