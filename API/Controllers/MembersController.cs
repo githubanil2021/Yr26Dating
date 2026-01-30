@@ -13,6 +13,7 @@ using API.Extensions;
 using System.Reflection.Metadata;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -22,11 +23,13 @@ namespace API.Controllers
             IPhotoService photoService) : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Member>>> GetMembers()
+        public async Task<ActionResult<List<Member>>> GetMembers([FromQuery]MemberParams memberParams)
         {
             // var members = await context.Users.ToListAsync();
             // return members;
-            return Ok(await memberRepository.GetMembersAsync());
+
+            memberParams.CurrentMemberId = User.GetMemberId();
+            return Ok(await memberRepository.GetMembersAsync(memberParams));
         }
 
 

@@ -12,7 +12,7 @@ export class AccountService {
   private http=inject(HttpClient);
   //baseUrl ='http://localhost:5001/api/';
   private baseUrl = environment.apiUrl;
-  
+
   currentUser = signal<User |null>(null);
 
   register(creds:RegisterCreds){
@@ -43,6 +43,7 @@ export class AccountService {
 
   logout(){
     localStorage.removeItem('user');
+    localStorage.removeItem('filters');
     this.currentUser.set(null);
     console.log('logout from accountservice');
   }
